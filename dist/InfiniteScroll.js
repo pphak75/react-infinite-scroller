@@ -107,7 +107,8 @@ var InfiniteScroll = function (_Component) {
       } else if (this.props.isReverse) {
         offset = el.parentNode.scrollTop;
       } else {
-        offset = el.scrollHeight - el.parentNode.scrollTop - el.parentNode.clientHeight;
+        var elemTop = el.getBoundingClientRect().top - el.offsetTop;
+        offset = el.scrollHeight - Math.abs(elemTop) - el.parentNode.clientHeight;
       }
 
       if (offset < Number(this.props.threshold)) {
